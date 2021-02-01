@@ -1,0 +1,34 @@
+### Description
+
+A web app that serves as a repository for families to upload old family recipes (via uploading of a document or photo) AND create new family recipes through a provided form. 
+
+###NOUNS
+
+-Family 
+
+-Collection
+
+-Recipe 
+
+-Photo 
+ 
+-Document 
+
+-Form 
+
+##VERBS
+
+-Upload 
+
+-Create 
+
+
+##MODELS
+
+-Family 
+-Collection
+-Recipe 
+
+
+
+
