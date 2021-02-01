@@ -16,11 +16,11 @@ Family heirloom users can:
 
 ## Tech Stack
 
--PHP
--Laravel
--Vue.js
--Tailwind CSS
--JetStream
+- PHP
+- Laravel
+- Vue.js
+- Tailwind CSS
+- JetStream
 
 ## Planning
 
