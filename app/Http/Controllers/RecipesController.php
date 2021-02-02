@@ -13,8 +13,9 @@ class RecipesController extends Controller
      */
     public function index()
     {
-        $recipes  = Recipe::all();
-        return view('recipes.index', ['recipes'=>$recipes]);
+        // $recipes  = Recipe::all();
+        // return view('recipes.index', ['recipes'=>$recipes]);
+        return 'recipes coming soon!';
     }
 
     /**

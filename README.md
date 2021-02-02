@@ -1,26 +1,30 @@
+![Family Cooks Logo](/images/logo.png)
+<!-- Format: ![Alt Text](url) -->
 
-## About Family Heirloom
 
-Family Heirloom is a web application that allows families to stay connected to their past, present, and future through the sharing of family recipes. 
+## About Family Cooks
 
-Family heirloom users can:
+Family Cooks is a web application that allows families to stay connected to their past, present, and future through sharing family recipes. 
 
-- Register a 'team' with Family Heirloom (FH) so that family can add recipes to a shared repository
+Users of Family Cooks can:
+
+- Register a 'team' so that family can add recipes to a shared repository
 - Upload photos of hand-written recipes
-- Transcribe recipes into a beautifully formatted form
+- Transcribe recipes into a beautifully styled form
 - Share transcription duties with other family members
 - Create author/biography pages for recipe authors
-- Comment on recipes, noting any changes you may have made while cooking the recipe
-- Order ingredients from a recipe straight off of Amazon Fresh. 
+- Comment on recipes, noting any changes that may have been made while cooking the recipe
+- Order ingredients from Amazon Fresh. 
 
 
-## Tech Stack
+## Tech Stack & Libraries
 
 - PHP
 - Laravel
 - Vue.js
 - Tailwind CSS
 - JetStream
+- Livewire
 
 ## Planning
 
