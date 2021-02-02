@@ -4,7 +4,7 @@
             <x-jet-authentication-card-logo />
             <div class="min-w-full">
                 <a href="/">
-                    <h1 class="text-xl font-medium">{{$title ?? ''}}</h1>
+                    <h1 class="text-xl font-extrabold">{{$title ?? ''}}</h1>
                 </a>
             </div>
         </x-slot>

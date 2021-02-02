@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- <link rel="icon" href="{{ URL::asset('favicon.png') }}" type="image/x-icon" /> --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('API Tokens') }}
