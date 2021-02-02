@@ -16,8 +16,6 @@
 
     @livewireStyles
 
-    {{-- <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon.png"> --}}
-    {{-- <link rel="icon" href="{{ mix('/assets/img/favicon.png') }}" type="image/x-icon"> --}}
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
