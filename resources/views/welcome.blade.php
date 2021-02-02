@@ -414,15 +414,14 @@
             @endauth
         </div>
         @endif
-        <div>
-            <img class="mx-auto resize border rounded-md" src="{{ URL::to('/assets/img/fh_logo.png') }}" alt="Logo"
-                width=" 400" height="380">
-            <span class="inline-block align-middle ...">
-                <h1 class="align-content: center;">Family Heirloom
-                    <p>Log In</p>
+        <div class="w-1/2">
+            {{-- <img class="mx-auto resize border rounded-md" src="{{ URL::to('/assets/img/logo.png') }}" alt="Logo"
+            width=" 200" height="180"> --}}
 
-            </span> </div>
-    </div>
+
+            <x-login title="Family Cooks"></x-login>
+
+        </div>
 </body>
 
 </html>
