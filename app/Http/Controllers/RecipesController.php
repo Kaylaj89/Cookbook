@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RecipeController extends Controller
+class RecipesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        //
+        return view('recipes.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        //
+        return "create a new recipe";
     }
 
     /**
@@ -34,7 +34,10 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $recipe = new Recipe();
+        $recipe->name = $request->name;
+        $recipe->directions = $request->directions;
+        $recipe->save();
     }
 
     /**
@@ -43,9 +46,9 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Recipe $recipe)
     {
-        //
+        return view('recipes.show', ['recipe'=>$recipe]);
     }
 
     /**
@@ -54,7 +57,7 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Recipe $recipe)
     {
         //
     }
@@ -66,7 +69,7 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Recipe $recipe)
     {
         //
     }
@@ -77,7 +80,7 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Recipe $recipe)
     {
         //
     }
