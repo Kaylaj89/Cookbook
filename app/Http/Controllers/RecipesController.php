@@ -13,7 +13,8 @@ class RecipesController extends Controller
      */
     public function index()
     {
-        return view('recipes.index');
+        $recipes  = Recipe::all();
+        return view('recipes.index', ['recipes'=>$recipes]);
     }
 
     /**
@@ -23,7 +24,7 @@ class RecipesController extends Controller
      */
     public function create()
     {
-        return "create a new recipe";
+        return view("recipes.create");
     }
 
     /**
