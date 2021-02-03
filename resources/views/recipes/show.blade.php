@@ -7,9 +7,9 @@
         Edit</a>
     </h2>
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+
     </h2>
   </x-slot>
-
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-10">
@@ -43,6 +43,7 @@
                   Ingredients:
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+
                   <ul>
                     @foreach ($ingredients as $ingredient)
                     <li>{{$ingredient}}</li>
@@ -128,7 +129,6 @@
             </dl>
           </div>
         </div>
-
       </div>
     </div>
   </div>

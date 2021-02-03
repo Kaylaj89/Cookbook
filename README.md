@@ -47,4 +47,6 @@ Trello Board: https://trello.com/b/1bMXQaVg/capstone-cookbook-app
 
 - https://laravel-livewire.com/ 
 
+- https://laravel.com/docs/8.x/blade
+
 
