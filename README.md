@@ -1,5 +1,5 @@
-![Family Cooks Logo](/images/logo.png)
-<!-- Format: ![Alt Text](url) -->
+
+
 
 
 ## About Family Cooks

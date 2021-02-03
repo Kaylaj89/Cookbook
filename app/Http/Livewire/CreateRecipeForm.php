@@ -4,10 +4,10 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class RecipesTable extends Component
+class CreateRecipeForm extends Component
 {
     public function render()
     {
-        return view('livewire.recipes-table');
+        return view('livewire.create-recipe-form');
     }
 }

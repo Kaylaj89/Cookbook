@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Recipe;
 
 class RecipesController extends Controller
 {
@@ -12,10 +13,20 @@ class RecipesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
+        $recipes = Recipe::all();
+        return view('recipes.index', ['recipes'=>$recipes]);
+        // if ($recipe) 
+        // {
         // $recipes  = Recipe::all();
         // return view('recipes.index', ['recipes'=>$recipes]);
-        return 'recipes coming soon!';
+        // }
+
+        // else
+        // {
+        //     return "no recipes yet!";
+        // }
     }
 
     /**
@@ -50,7 +61,15 @@ class RecipesController extends Controller
      */
     public function show(Recipe $recipe)
     {
+        if ($recipes)
+        {
+        
         return view('recipes.show', ['recipe'=>$recipe]);
+        }
+        else {
+
+        "No recipes yet!";
+        }
     }
 
     /**

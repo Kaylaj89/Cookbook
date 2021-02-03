@@ -17,6 +17,11 @@ class CreateRecipesTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->text('directions');
+            $table->text('description');
+            $table->json('ingredients');
+            $table->json('steps');
+            $table->enum('privacy', ['private', 'public'])->default('private');
+            $table->integer('likes');   
             $table->timestamps();
         });
     }
