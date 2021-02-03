@@ -1,4 +1,4 @@
-@livewireStyles
+{{-- @livewireStyles
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
@@ -27,4 +27,4 @@
     @livewireScripts
 </body>
 
-</html>
+</html> --}}

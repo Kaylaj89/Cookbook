@@ -9,7 +9,7 @@
     </div>
   </x-slot>
 
-  @if (count($recipes) < 1) <p>no recipes here</p>
+  @if (count($recipes) < 1) <p>no recipes here yet! Why not create one?</p>
     @else
 
     <!-- This example requires Tailwind CSS v2.0+ -->
