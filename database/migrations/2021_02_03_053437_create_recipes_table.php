@@ -16,12 +16,12 @@ class CreateRecipesTable extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->text('directions');
-            $table->text('description');
-            $table->json('ingredients');
-            $table->json('steps');
+            $table->text('directions')->nullable();
+            $table->text('description')->nullable();
+            $table->json('ingredients')->nullable();
+            $table->json('steps')->nullable();
             $table->enum('privacy', ['private', 'public'])->default('private');
-            $table->integer('likes');   
+            $table->integer('likes')->default('0');  
             $table->timestamps();
         });
     }

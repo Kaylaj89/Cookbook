@@ -33,3 +33,18 @@ Trello Board: https://trello.com/b/1bMXQaVg/capstone-cookbook-app
 
 ## Future Ideas
 
+##To Be Organized Later (if needed)
+
+- https://blade-ui-kit.com/docs/0.x/introduction 
+
+- https://laravel.com/docs/8.x/sail
+
+- https://laracasts.com/ 
+
+- https://tailwindcss.com/
+
+- https://jetstream.laravel.com/2.x/introduction.html
+
+- https://laravel-livewire.com/ 
+
+

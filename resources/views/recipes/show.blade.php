@@ -2,6 +2,9 @@
   <x-slot name="header">
     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
       {{$recipe->name}} by Author
+      <a href="/recipes/{{$recipe->id}}/edit"
+        class="float-right text-white font-bold rounded-lg text-sm bg-green-500 px-4 py-2">
+        Edit</a>
     </h2>
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
     </h2>
@@ -27,20 +30,36 @@
                   {{$recipe->name}}
                 </dd>
               </div>
+              <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Description
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{$recipe->description}}
+                </dd>
+              </div>
               <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                   Ingredients:
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  Coming soon
+                  <ul>
+                    @foreach ($ingredients as $ingredient)
+                    <li>{{$ingredient}}</li>
+                    @endforeach
+                  </ul>
                 </dd>
               </div>
               <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
-                  Directions:
+                  Cooking Directions:
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {{$recipe->directions}}
+                  <ul>
+                    @foreach ($steps as $step)
+                    <li>{{$step}}</li>
+                    @endforeach
+                  </ul>
                 </dd>
               </div>
               <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

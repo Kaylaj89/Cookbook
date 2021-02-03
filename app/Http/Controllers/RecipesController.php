@@ -49,8 +49,14 @@ class RecipesController extends Controller
     {
         $recipe = new Recipe();
         $recipe->name = $request->name;
-        $recipe->directions = $request->directions;
+        $recipe->description = $request->description; 
+        //split ingredients by line so that can create json
+        $ingredientByLine = json_encode(explode(PHP_EOL, $request->ingredients));
+        $recipe->ingredients = $ingredientByLine;
+        $stepsByLine = json_encode(explode(PHP_EOL, $request->cooking_Directions));
+        $recipe->steps = $stepsByLine;
         $recipe->save();
+        return redirect('/recipes');
     }
 
     /**
@@ -61,15 +67,16 @@ class RecipesController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        if ($recipes)
-        {
-        
-        return view('recipes.show', ['recipe'=>$recipe]);
+        $ingredients = [];
+        if(!empty($recipe->ingredients)){
+            $ingredients = json_decode($recipe->ingredients);
         }
-        else {
+        $steps = [];
+        if(!empty($recipe->steps)){
+            $steps = json_decode($recipe->steps);
+        }
+        return view('recipes.show', ['recipe'=>$recipe, 'ingredients' => $ingredients, 'steps'=> $steps]);
 
-        "No recipes yet!";
-        }
     }
 
     /**
@@ -80,7 +87,15 @@ class RecipesController extends Controller
      */
     public function edit(Recipe $recipe)
     {
-        //
+        $ingredients = [];
+        if(!empty($recipe->ingredients)){
+          $ingredients = json_decode($recipe->ingredients);
+        }
+        $steps = [];
+        if(!empty($recipe->steps)){
+            $steps = json_decode($recipe->steps);
+        }
+        return view('recipes.edit', ['recipe'=>$recipe, 'ingredients' => $ingredients, 'steps'=>$steps]);
     }
 
     /**
@@ -92,7 +107,16 @@ class RecipesController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        //
+        $recipe->name = $request->name;
+        $recipe->description = $request->description;
+        //split the ingredients by line and create json
+        $ingredientByLine = json_encode(explode(PHP_EOL, $request->ingredients));
+        $recipe->ingredients = $ingredientByLine;
+        $stepsByLine = json_encode(explode(PHP_EOL, $request->cooking_Directions));
+        $recipe->steps = $stepsByLine;
+        //$recipe->privacy = isset($request->privacy)?? ;
+        $recipe->save();  
+        return $this->show($recipe);
     }
 
     /**
@@ -103,6 +127,7 @@ class RecipesController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        //
+        $recipe->delete();
+        return redirect('/recipes');
     }
 }
