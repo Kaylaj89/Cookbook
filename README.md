@@ -49,4 +49,6 @@ Trello Board: https://trello.com/b/1bMXQaVg/capstone-cookbook-app
 
 - https://laravel.com/docs/8.x/blade
 
+- https://carbon.nesbot.com/docs/ (great for showing human readable time!)
+
 

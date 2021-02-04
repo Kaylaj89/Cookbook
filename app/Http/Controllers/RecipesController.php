@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Recipe;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RecipesController extends Controller
 {
@@ -13,20 +14,9 @@ class RecipesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-
     {
         $recipes = Recipe::all();
         return view('recipes.index', ['recipes'=>$recipes]);
-        // if ($recipe) 
-        // {
-        // $recipes  = Recipe::all();
-        // return view('recipes.index', ['recipes'=>$recipes]);
-        // }
-
-        // else
-        // {
-        //     return "no recipes yet!";
-        // }
     }
 
     /**
@@ -36,7 +26,7 @@ class RecipesController extends Controller
      */
     public function create()
     {
-        return view("recipes.create");
+       return view("recipes.create");
     }
 
     /**
@@ -49,40 +39,42 @@ class RecipesController extends Controller
     {
         $recipe = new Recipe();
         $recipe->name = $request->name;
-        $recipe->description = $request->description; 
-        //split ingredients by line so that can create json
+        $recipe->description = $request->description;
+        //split the ingredients by line and create json
         $ingredientByLine = json_encode(explode(PHP_EOL, $request->ingredients));
         $recipe->ingredients = $ingredientByLine;
         $stepsByLine = json_encode(explode(PHP_EOL, $request->cooking_Directions));
         $recipe->steps = $stepsByLine;
-        $recipe->save();
-        return redirect('/recipes');
+        //do attachments here 
+        $this->updateAttachments($recipe, $request);
+        //$recipe->privacy = isset($request->privacy)?? ;
+        $recipe->save();  
+        return $this->show($recipe);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Recipe  $recipe
      * @return \Illuminate\Http\Response
      */
     public function show(Recipe $recipe)
-    {
+    {         
         $ingredients = [];
         if(!empty($recipe->ingredients)){
-            $ingredients = json_decode($recipe->ingredients);
+          $ingredients = json_decode($recipe->ingredients);
         }
         $steps = [];
         if(!empty($recipe->steps)){
             $steps = json_decode($recipe->steps);
         }
-        return view('recipes.show', ['recipe'=>$recipe, 'ingredients' => $ingredients, 'steps'=> $steps]);
-
+        return view('recipes.show', ['recipe'=>$recipe, 'ingredients' => $ingredients, 'steps'=>$steps]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Recipe  $recipe
      * @return \Illuminate\Http\Response
      */
     public function edit(Recipe $recipe)
@@ -102,7 +94,7 @@ class RecipesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Recipe  $recipe
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Recipe $recipe)
@@ -114,7 +106,8 @@ class RecipesController extends Controller
         $recipe->ingredients = $ingredientByLine;
         $stepsByLine = json_encode(explode(PHP_EOL, $request->cooking_Directions));
         $recipe->steps = $stepsByLine;
-        //$recipe->privacy = isset($request->privacy)?? ;
+        $this->updateAttachments($recipe, $request);
+       //$recipe->privacy = isset($request->privacy)?? ;
         $recipe->save();  
         return $this->show($recipe);
     }
@@ -122,12 +115,54 @@ class RecipesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Recipe  $recipe
      * @return \Illuminate\Http\Response
      */
     public function destroy(Recipe $recipe)
     {
+        $this->deleteOldAttachments($recipe);
         $recipe->delete();
         return redirect('/recipes');
+    }
+
+    public function deleteOldAttachments(Recipe $recipe){
+        $attachmentsArray = json_decode($recipe->attachments, true);
+        if(count($attachmentsArray['fileNames']) > 0){
+         foreach($attachmentsArray['fileNames'] as $fileName => $originalName){
+                Storage::disk('public')->delete('uploads/images/'. $fileName);
+            }
+            $recipe->attachments = null;
+        }
+    }
+    public function updateAttachments(Recipe $recipe, Request $request){         
+        if($request->hasFile('attachments'))
+        {
+            $filesArray = $request->file('attachments'); 
+            $filesJson = [];
+            $filesJson['count'] = count($filesArray);
+            $fileNamesArray= [];
+            foreach ($filesArray as $file) {
+                //unique key with original filename as value
+                $fileNamesArray[$file->hashName()]= $file->getClientOriginalName();
+                $file->store('public/uploads/images');
+            }
+            $filesJson['fileNames'] = $fileNamesArray;
+            $recipe->attachments = json_encode($filesJson);
+        }
+    }
+
+    public function deleteAttachment(Request $request, Recipe $recipe, $fileName){
+        $recipeAttachments = json_decode($recipe->attachments, true);
+        foreach ($recipeAttachments['fileNames'] as $key => $value) {
+            if($key == $fileName){
+                unset($recipeAttachments['fileNames'][$key]);
+            }
+        }
+        $recipe->attachments = $recipeAttachments;
+        $recipe->save();
+        if (Storage::disk('public')->exists('uploads/images/'. $fileName)) {
+            Storage::disk('public')->delete('uploads/images/'. $fileName);
+        }
+        return back()->withInput();
     }
 }

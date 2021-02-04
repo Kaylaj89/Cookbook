@@ -17,8 +17,9 @@ class CreateRecipesTable extends Migration
             $table->text('description')->nullable();
             $table->json('ingredients')->nullable();
             $table->json('steps')->nullable();
-            $table->enum('privacy', ['private', 'public'])->default('private'); 
-            $table->integer('likes')->default('0');   
+            $table->json('attachments')->nullable();
+            // $table->enum('privacy', ['private', 'public'])->default('private'); 
+            // $table->integer('likes')->default('0');   
             $table->timestamps();
         });
     }
