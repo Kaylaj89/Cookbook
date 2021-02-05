@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recipe;
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,7 +27,8 @@ class RecipesController extends Controller
      */
     public function create()
     {
-       return view("recipes.create");
+        $authors = Author::all();
+       return view("recipes.create", ['authors'=>$authors]);
     }
 
     /**
@@ -39,11 +41,17 @@ class RecipesController extends Controller
     {
         $recipe = new Recipe();
         $recipe->name = $request->name;
+        $author = Author::find($request->author);
+        if($author){
+            $recipe->author_id = $author->id;
+        }else{
+            $recipe->author_id = null;
+        }
         $recipe->description = $request->description;
         //split the ingredients by line and create json
-        $ingredientByLine = json_encode(explode(PHP_EOL, $request->ingredients));
+        $ingredientByLine = explode(PHP_EOL, $request->ingredients)[0] == ''? null : json_encode(explode(PHP_EOL, $request->ingredients));
         $recipe->ingredients = $ingredientByLine;
-        $stepsByLine = json_encode(explode(PHP_EOL, $request->cooking_Directions));
+        $stepsByLine = explode(PHP_EOL, $request->cooking_Directions)[0] == '' ? null : json_encode(explode(PHP_EOL, $request->cooking_Directions));
         $recipe->steps = $stepsByLine;
         //do attachments here 
         $this->updateAttachments($recipe, $request);
@@ -87,7 +95,8 @@ class RecipesController extends Controller
         if(!empty($recipe->steps)){
             $steps = json_decode($recipe->steps);
         }
-        return view('recipes.edit', ['recipe'=>$recipe, 'ingredients' => $ingredients, 'steps'=>$steps]);
+        $authors = Author::all();
+        return view('recipes.edit', ['recipe'=>$recipe, 'ingredients' => $ingredients, 'steps'=>$steps, 'authors'=>$authors]);
     }
 
     /**
@@ -100,11 +109,17 @@ class RecipesController extends Controller
     public function update(Request $request, Recipe $recipe)
     {
         $recipe->name = $request->name;
+        $author = Author::find($request->author);
+        if($author){
+            $recipe->author_id = $author->id;
+        }else{
+            $recipe->author_id = null;
+        }
         $recipe->description = $request->description;
         //split the ingredients by line and create json
-        $ingredientByLine = json_encode(explode(PHP_EOL, $request->ingredients));
+        $ingredientByLine = explode(PHP_EOL, $request->ingredients)[0] == ''? null : json_encode(explode(PHP_EOL, $request->ingredients));
         $recipe->ingredients = $ingredientByLine;
-        $stepsByLine = json_encode(explode(PHP_EOL, $request->cooking_Directions));
+        $stepsByLine = explode(PHP_EOL, $request->cooking_Directions)[0] == '' ? null : json_encode(explode(PHP_EOL, $request->cooking_Directions));
         $recipe->steps = $stepsByLine;
         $this->updateAttachments($recipe, $request);
        //$recipe->privacy = isset($request->privacy)?? ;
@@ -127,7 +142,7 @@ class RecipesController extends Controller
 
     public function deleteOldAttachments(Recipe $recipe){
         $attachmentsArray = json_decode($recipe->attachments, true);
-        if(count($attachmentsArray['fileNames']) > 0){
+        if($attachmentsArray != null ){
          foreach($attachmentsArray['fileNames'] as $fileName => $originalName){
                 Storage::disk('public')->delete('uploads/images/'. $fileName);
             }
@@ -139,7 +154,6 @@ class RecipesController extends Controller
         {
             $filesArray = $request->file('attachments'); 
             $filesJson = [];
-            $filesJson['count'] = count($filesArray);
             $fileNamesArray= [];
             foreach ($filesArray as $file) {
                 //unique key with original filename as value
@@ -152,13 +166,15 @@ class RecipesController extends Controller
     }
 
     public function deleteAttachment(Request $request, Recipe $recipe, $fileName){
-        $recipeAttachments = json_decode($recipe->attachments, true);
-        foreach ($recipeAttachments['fileNames'] as $key => $value) {
-            if($key == $fileName){
-                unset($recipeAttachments['fileNames'][$key]);
+        $recipeAttachments = count(json_decode($recipe->attachments, true)) > 0 ? json_decode($recipe->attachments, true) : null;
+        if($recipeAttachments != null){
+            foreach ($recipeAttachments['fileNames'] as $key => $value) {
+                if($key == $fileName){
+                    unset($recipeAttachments['fileNames'][$key]);
+                }
             }
         }
-        $recipe->attachments = json_encode($recipeAttachments);
+        $recipe->attachments = count($recipeAttachments['fileNames'] )<= 0 ? null : json_encode($recipeAttachments);
         $recipe->save();
         if (Storage::disk('public')->exists('uploads/images/'. $fileName)) {
             Storage::disk('public')->delete('uploads/images/'. $fileName);

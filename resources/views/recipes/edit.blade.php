@@ -24,6 +24,8 @@
 
           <x-forms.input name="name" value="{{$recipe->name}}">
             </x-form.input>
+            <x-forms.select name="author" :options="$authors" :selected="$recipe->author_id">
+            </x-forms.select>
             <x-forms.textarea name="description">
               Brief description of your recipe.
               <x-slot name="content">{{$recipe->description}}</x-slot>

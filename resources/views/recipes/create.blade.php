@@ -14,6 +14,9 @@
 
           <x-forms.input name="name" />
 
+          <x-forms.select name="author" :options="$authors" selected="0">
+          </x-forms.select>
+
           <x-forms.textarea name="description">
             Brief description of your recipe.
           </x-forms.textarea>
