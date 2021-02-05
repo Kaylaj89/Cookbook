@@ -20,10 +20,10 @@
           <x-forms.textarea name="description">
             Brief description of your recipe.
           </x-forms.textarea>
-          <x-forms.textarea name="ingredients">
+          <x-forms.textarea name="ingredients" rows="6">
             List each ingredient on it's own line.
           </x-forms.textarea>
-          <x-forms.textarea name="cooking_Directions">
+          <x-forms.textarea name="cooking_Directions" rows="10">
             List each step on it's own line.
           </x-forms.textarea>
 
