@@ -7,17 +7,30 @@
       </x-layout.crud-button>
     </h2>
   </x-slot>
+  <x-layout.panel width="3">
+    @if(count($authors) > 0)
+    <x-layout.table :headerCols="['name', 'recipe count', '']">
+      @foreach ($authors as $author)
+      <tr>
+        <x-layout.table-cell>
+          <x-layout.link href="/authors/{{$author->id}}">{{$author->name}}</x-layout.link>
+        </x-layout.table-cell>
+        <x-layout.table-cell>{{count($author->recipes)}}</x-layout.table-cell>
+        <x-layout.table-cell>
+          <x-layout.link href="/authors/{{$author->id}}">View</x-layout.link> |
+          <x-layout.link href="/authors/{{$author->id}}/edit">Edit</x-layout.link>
+        </x-layout.table-cell>
+      </tr>
+      @endforeach
+    </x-layout.table>
+    @else
+    <x-layout.no-data model="authors"></x-layout.no-data>
 
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-        <ul>
-          @foreach ($authors as $author)
-          <li>{{$author->name}} : {{$author->bio ?? 'requires bio'}} </li>
+    @endif
+  </x-layout.panel>
 
-          @endforeach
-        </ul>
-      </div>
-    </div>
+  </ul>
+  </div>
+  </div>
   </div>
 </x-app-layout>

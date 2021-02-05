@@ -51,7 +51,8 @@ class AuthorsController extends Controller
      */
     public function show($id)
     {
-        //
+        $author = Author::find($id);
+        return view('authors.show', ['author'=>$author]);
     }
 
     /**
@@ -62,7 +63,8 @@ class AuthorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $author = Author::find($id);
+        return view('authors.edit', ['author'=>$author]);
     }
 
     /**
@@ -74,7 +76,11 @@ class AuthorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $author = Author::find($id);
+        $author->name = $request->name;
+        $author->bio = $request->bio;
+        $author->save();
+        return $this->show($id);
     }
 
     /**
@@ -85,6 +91,8 @@ class AuthorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $author = Author::find($id);
+        $author->delete();
+        return $this->index();
     }
 }

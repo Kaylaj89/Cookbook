@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-      {{$recipe->name}} by Author
+      {{$recipe->name}} by {{$recipe->author->name}}
       <x-layout.crud-button href="/recipes/{{$recipe->id}}/edit" color="green">
         Edit Recipe
       </x-layout.crud-button>

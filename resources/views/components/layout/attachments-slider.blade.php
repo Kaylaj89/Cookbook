@@ -4,7 +4,7 @@
     }
 
     .slider {
-        width: 1000px;
+        width: 100%;
         text-align: center;
         overflow: hidden;
     }
