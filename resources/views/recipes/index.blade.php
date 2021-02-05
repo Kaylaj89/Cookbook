@@ -2,10 +2,9 @@
   <x-slot name="header">
     <div class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
       {{ __('Recipes') }}
-
-      <a href="/recipes/create" class="float-right text-white font-bold rounded-lg text-sm bg-green-500 px-4 py-2">
-        Add New</a>
-
+      <x-layout.crud-button href="/recipes/create" color="green">
+        Add New Recipe
+      </x-layout.crud-button>
     </div>
   </x-slot>
 

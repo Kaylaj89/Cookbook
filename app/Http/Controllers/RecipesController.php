@@ -158,7 +158,7 @@ class RecipesController extends Controller
                 unset($recipeAttachments['fileNames'][$key]);
             }
         }
-        $recipe->attachments = $recipeAttachments;
+        $recipe->attachments = json_encode($recipeAttachments);
         $recipe->save();
         if (Storage::disk('public')->exists('uploads/images/'. $fileName)) {
             Storage::disk('public')->delete('uploads/images/'. $fileName);

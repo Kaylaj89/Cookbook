@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipesController; 
+use App\Http\Controllers\AuthorsController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resources([
-    'recipes' => RecipesController::class
-]);
+    'recipes' => RecipesController::class,
+    'authors' => AuthorsController::class
+    ]);
 
 Route::post('/recipes/{recipe}/{fileName}', [RecipesController::class, 'deleteAttachment'])->name('recipes.attachment.delete');
 

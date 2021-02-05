@@ -2,9 +2,9 @@
   <x-slot name="header">
     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
       {{$recipe->name}} by Author
-      <a href="/recipes/{{$recipe->id}}/edit"
-        class="float-right text-white font-bold rounded-lg text-sm bg-green-500 px-4 py-2">
-        Edit</a>
+      <x-layout.crud-button href="/recipes/{{$recipe->id}}/edit" color="green">
+        Edit Recipe
+      </x-layout.crud-button>
     </h2>
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
 
@@ -95,6 +95,10 @@
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
                   @if($recipe->attachments == null)
+                  @php
+                  $attachments = json_decode($recipe->attachments, true);
+                  @endphp
+
                   <p class="text-center m-5">This recipe does not have any attachments yet.</p>
                   @else
                   @foreach($attachments['fileNames'] as $fileName => $originalFileName)

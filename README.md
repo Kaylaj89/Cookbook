@@ -51,4 +51,10 @@ Trello Board: https://trello.com/b/1bMXQaVg/capstone-cookbook-app
 
 - https://carbon.nesbot.com/docs/ (great for showing human readable time!)
 
+- https://tailwindui.com/ 
+
+- https://trix-editor.org/ 
+
+- https://css-tricks.com/css-only-carousel/ 
+
 

@@ -62,6 +62,10 @@
           Delete Recipe
         </x-buk-form-button>
         @if($recipe->attachments != null)
+        @php
+        $attachments = json_decode($recipe->attachments, true);
+        @endphp
+
         <ul>
           @foreach($attachments['fileNames'] as $fileName => $originalFileName)
           <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
