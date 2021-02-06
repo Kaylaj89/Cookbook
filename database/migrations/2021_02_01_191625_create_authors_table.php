@@ -17,6 +17,8 @@ class CreateAuthorsTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->text('bio')->nullable();
+            $table->foreignId('user_id');
+            $table->foreignId('team_id');
             $table->timestamps();
         });
     }

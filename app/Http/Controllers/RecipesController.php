@@ -16,7 +16,8 @@ class RecipesController extends Controller
      */
     public function index()
     {
-        $recipes = Recipe::all();
+        $user = Auth()->user();
+        $recipes = Recipe::all()->where('team_id', '=', $user->currentTeam->id);
         return view('recipes.index', ['recipes'=>$recipes]);
     }
 
@@ -27,7 +28,8 @@ class RecipesController extends Controller
      */
     public function create()
     {
-        $authors = Author::all();
+        $user = auth()->user();
+        $authors = Author::all()->where('team_id', '=', $user->currentTeam->id);
        return view("recipes.create", ['authors'=>$authors]);
     }
 
@@ -39,8 +41,11 @@ class RecipesController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth()->user();
         $recipe = new Recipe();
         $recipe->name = $request->name;
+        $recipe->user_id = $user->id;
+        $recipe->team_id = $user->currentTeam->id;
         $author = Author::find($request->author);
         if($author){
             $recipe->author_id = $author->id;
@@ -67,7 +72,9 @@ class RecipesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Recipe $recipe)
-    {         
+    {       
+        
+        $this->authorize('view', [$recipe]);
         $ingredients = [];
         if(!empty($recipe->ingredients)){
           $ingredients = json_decode($recipe->ingredients);
@@ -87,6 +94,9 @@ class RecipesController extends Controller
      */
     public function edit(Recipe $recipe)
     {
+       $user = auth()->user();
+       $this->authorize('update', [$recipe]);
+       
         $ingredients = [];
         if(!empty($recipe->ingredients)){
           $ingredients = json_decode($recipe->ingredients);
@@ -95,7 +105,7 @@ class RecipesController extends Controller
         if(!empty($recipe->steps)){
             $steps = json_decode($recipe->steps);
         }
-        $authors = Author::all();
+        $authors = Author::all()->where('team_id', '=', $user->currentTeam->id);
         return view('recipes.edit', ['recipe'=>$recipe, 'ingredients' => $ingredients, 'steps'=>$steps, 'authors'=>$authors]);
     }
 
@@ -108,6 +118,7 @@ class RecipesController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
+        $this->authorize('update', [$recipe]);
         $recipe->name = $request->name;
         $author = Author::find($request->author);
         if($author){
@@ -135,6 +146,7 @@ class RecipesController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
+        $this->authorize('delete', [$recipe]);
         $this->deleteOldAttachments($recipe);
         $recipe->delete();
         return redirect('/recipes');

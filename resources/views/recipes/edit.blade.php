@@ -50,6 +50,7 @@
     </x-forms.form>
   </x-layout.panel>
 
+  @can('delete-recipe', $recipe)
   <x-layout.panel width="5">
     <x-layout.h3>Careful! You can NOT undo this.</x-layout.h3>
     <x-buk-form-button :action="route('recipes.destroy', $recipe->id)" method="DELETE"
@@ -88,8 +89,6 @@
       @endforeach
     </ul>
     @endif
-
-
   </x-layout.panel>
-
+  @endcan
 </x-app-layout>

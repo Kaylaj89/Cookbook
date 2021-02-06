@@ -2,11 +2,11 @@
 
 
 
-## About Family Cooks
+## About Family Recipes
 
-Family Cooks is a web application that allows families to stay connected to their past, present, and future through sharing family recipes. 
+Family Recipes is a web application that allows families to stay connected to their past, present, and future through sharing family recipes. 
 
-Users of Family Cooks can:
+Users of Family Recipes can:
 
 - Register a 'team' so that family can add recipes to a shared repository
 - Upload photos of hand-written recipes

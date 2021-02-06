@@ -10,6 +10,7 @@
   </x-slot>
 
   <x-layout.panel width="5">
+
     @if($recipe->attachments == null)
     <p class="text-center mt-5">This recipe does not have any attachments yet.</p>
     @else
@@ -25,6 +26,7 @@
       <x-layout.dl-row title="Description" color="white">
         {{$recipe->description ?? ''}}
       </x-layout.dl-row>
+
       <x-layout.dl-row title="Ingredients">
         @if(count($ingredients) > 0)
         <ul>
@@ -47,13 +49,20 @@
         </ul>
         @endif
       </x-layout.dl-row>
+
       <x-layout.dl-row title="Author">
         <x-layout.link href="/authors/{{$recipe->author->id ?? ''}}">{{$recipe->author->name ?? ''}}</x-layout.link>
       </x-layout.dl-row>
+
       <x-layout.dl-row title="Created" color="white">
-        {{$recipe->created_at->diffForHumans()}}
+        {{$recipe->created_at->diffForHumans()}} by {{$recipe->user->name}}
       </x-layout.dl-row>
-      <x-layout.dl-row title="Attachments">
+
+      <x-layout.dl-row title="Team">
+        {{$recipe->team->name}}
+      </x-layout.dl-row>
+      <x-layout.dl-row title="Attachments" color="white">
+
 
         @if($recipe->attachments == null)
         <p class="text-center m-5">This recipe does not have any attachments yet.</p>
@@ -93,8 +102,6 @@
         @endif
       </x-layout.dl-row>
     </x-layout.description-list>
-
-
     </div>
     </div>
     </div>

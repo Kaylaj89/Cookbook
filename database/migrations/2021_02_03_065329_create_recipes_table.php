@@ -19,6 +19,8 @@ class CreateRecipesTable extends Migration
             $table->json('steps')->nullable();
             $table->json('attachments')->nullable();
             $table->foreignId('author_id')->nullable();
+            $table->foreignId('user_id');
+            $table->foreignId('team_id');
             // $table->enum('privacy', ['private', 'public'])->default('private'); 
             // $table->integer('likes')->default('0');   
             $table->timestamps();

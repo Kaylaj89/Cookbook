@@ -14,7 +14,8 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
+        $user = auth()->user();
+        $authors = Author::all()->where('team_id', '=', $user->currentTeam->id);
         return view('authors.index', ['authors'=>$authors]);
     }
 
@@ -25,6 +26,7 @@ class AuthorsController extends Controller
      */
     public function create()
     {
+
         return view('authors.create');
     }
 
@@ -36,9 +38,12 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
         $author = new Author();
+        $author->team_id = $user->currentTeam->id;
         $author->name = $request->name;
         $author->bio = $request->bio;
+        $author->user_id = $user->id;
         $author->save();
         return $this->index();
     }
@@ -52,6 +57,7 @@ class AuthorsController extends Controller
     public function show($id)
     {
         $author = Author::find($id);
+        $this->authorize('view', [$author]);
         return view('authors.show', ['author'=>$author]);
     }
 
@@ -64,6 +70,7 @@ class AuthorsController extends Controller
     public function edit($id)
     {
         $author = Author::find($id);
+        $this->authorize('update', [$author]);
         return view('authors.edit', ['author'=>$author]);
     }
 
@@ -77,6 +84,7 @@ class AuthorsController extends Controller
     public function update(Request $request, $id)
     {
         $author = Author::find($id);
+        $this->authorize('update', [$author]);
         $author->name = $request->name;
         $author->bio = $request->bio;
         $author->save();
@@ -92,6 +100,7 @@ class AuthorsController extends Controller
     public function destroy($id)
     {
         $author = Author::find($id);
+        $this->authorize('delete', [$author]);
         $author->delete();
         return $this->index();
     }

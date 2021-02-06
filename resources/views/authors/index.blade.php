@@ -7,15 +7,18 @@
       </x-layout.crud-button>
     </h2>
   </x-slot>
+
   <x-layout.panel width="3">
     @if(count($authors) > 0)
-    <x-layout.table :headerCols="['name', 'recipe count', '']">
-      @foreach ($authors as $author)
+    <x-layout.table :headerCols="['name', 'recipe count', 'created by', '']">
+      @foreach($authors as $author)
       <tr>
         <x-layout.table-cell>
           <x-layout.link href="/authors/{{$author->id}}">{{$author->name}}</x-layout.link>
         </x-layout.table-cell>
         <x-layout.table-cell>{{count($author->recipes)}}</x-layout.table-cell>
+        <x-layout.table-cell>{{$author->user->name ?? ''}}</x-layout.table-cell>
+
         <x-layout.table-cell>
           <x-layout.link href="/authors/{{$author->id}}">View</x-layout.link> |
           <x-layout.link href="/authors/{{$author->id}}/edit">Edit</x-layout.link>
@@ -25,7 +28,6 @@
     </x-layout.table>
     @else
     <x-layout.no-data model="authors"></x-layout.no-data>
-
     @endif
   </x-layout.panel>
 

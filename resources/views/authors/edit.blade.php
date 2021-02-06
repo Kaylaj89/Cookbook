@@ -5,6 +5,7 @@
     </h2>
   </x-slot>
 
+  @can('delete-author', $author)
   <x-layout.panel width="5">
     <x-forms.form action="/authors/{{$author->id}}" method="PATCH">
       <x-forms.input name="name" :value="$author->name"></x-forms.input>
@@ -23,4 +24,5 @@
       Delete Author
     </x-buk-form-button>
   </x-layout.panel>
+  @endcan
 </x-app-layout>
