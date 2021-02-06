@@ -41,4 +41,11 @@ class Team extends JetstreamTeam
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+       public function authors(){
+            return $this->hasMany(Author::class);
+        }
+        public function recipes(){
+            return $this->hasMany(Recipe::class);
+         }
 }

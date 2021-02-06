@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class RecipesController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Recipe::class, 'recipe');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +45,7 @@ class RecipesController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth()->user();
+        $user = auth()->user();
         $recipe = new Recipe();
         $recipe->name = $request->name;
         $recipe->user_id = $user->id;
@@ -74,7 +78,7 @@ class RecipesController extends Controller
     public function show(Recipe $recipe)
     {       
         
-        $this->authorize('view', [$recipe]);
+        $user = auth()->user();
         $ingredients = [];
         if(!empty($recipe->ingredients)){
           $ingredients = json_decode($recipe->ingredients);
@@ -83,7 +87,7 @@ class RecipesController extends Controller
         if(!empty($recipe->steps)){
             $steps = json_decode($recipe->steps);
         }
-        return view('recipes.show', ['recipe'=>$recipe, 'ingredients' => $ingredients, 'steps'=>$steps]);
+        return view('recipes.show', ['recipe'=>$recipe, 'ingredients' => $ingredients, 'steps'=>$steps, 'comments'=>$recipe->timeline()]);
     }
 
     /**
@@ -95,7 +99,6 @@ class RecipesController extends Controller
     public function edit(Recipe $recipe)
     {
        $user = auth()->user();
-       $this->authorize('update', [$recipe]);
        
         $ingredients = [];
         if(!empty($recipe->ingredients)){
@@ -118,7 +121,6 @@ class RecipesController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        $this->authorize('update', [$recipe]);
         $recipe->name = $request->name;
         $author = Author::find($request->author);
         if($author){

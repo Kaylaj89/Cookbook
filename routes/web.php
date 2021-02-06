@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipesController; 
 use App\Http\Controllers\AuthorsController; 
+use App\Http\Controllers\CommentsController;
 
 
 /*
@@ -26,9 +27,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::resources([
     'recipes' => RecipesController::class,
-    'authors' => AuthorsController::class
+    'authors' => AuthorsController::class,
     ]);
 
 Route::post('/recipes/{recipe}/{fileName}', [RecipesController::class, 'deleteAttachment'])->name('recipes.attachment.delete');
+Route::post('/comments', [CommentsController::class, 'store'])->name('comment.save');
+
 
 

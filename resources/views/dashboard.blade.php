@@ -1,15 +1,29 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
-            </div>
-        </div>
-    </div>
+
+    <x-layout.panel width="2">
+        @php
+        $user = auth()->user();
+        @endphp
+        <x-layout.description-list title="Quick Stats: {!!$user->currentTeam->name!!}">
+            <x-layout.dl-row title="Users" class="text-right">
+                {{count($user->currentTeam->allUsers())}}
+            </x-layout.dl-row>
+
+            <x-layout.dl-row title="Authors" color="white" class="text-right">
+                {{count($user->currentTeam->authors)}}
+            </x-layout.dl-row>
+
+            <x-layout.dl-row title="Recipes" class="text-right">
+                {{count($user->currentTeam->recipes)}}
+            </x-layout.dl-row>
+        </x-layout.description-list>
+    </x-layout.panel>
+
+
 </x-app-layout>

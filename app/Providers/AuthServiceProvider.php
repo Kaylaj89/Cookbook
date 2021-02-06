@@ -5,7 +5,12 @@ namespace App\Providers;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-
+use App\Models\Recipe;
+use App\Models\User;
+use App\Models\Author;
+use App\Policies\RecipePolicy;
+use App\Policies\AuthorPolicy;
+use Illuminate\Support\Facades\Gate;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -15,6 +20,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Team::class => TeamPolicy::class,
+        Recipe::class => RecipePolicy::class,
+        Author::class => AuthorPolicy::class,
     ];
 
     /**
@@ -25,7 +32,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
     }
 }

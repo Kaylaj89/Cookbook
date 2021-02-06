@@ -22,7 +22,7 @@
   @if(count($author->recipes))
   <x-layout.panel width='4'>
     <x-layout.h3>Recipes by {{$author->name}}</x-layout.h3>
-    <x-layout.recipes-table :recipes='$author->recipes'></x-layout.recipes-table>
+    <x-layout.recipes-table :recipes='$author->recipes' :except="['author']"></x-layout.recipes-table>
   </x-layout.panel>
   @endif
 </x-app-layout>

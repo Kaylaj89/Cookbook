@@ -3,6 +3,7 @@
     <x-layout.h2 class="capitalize">
       {{$recipe->name}} by <x-layout.link href="/authors/{{$recipe->author->id ?? ''}}">
         {{$recipe->author->name ?? 'Author'}}</x-layout.link>
+
       <x-layout.crud-button href="/recipes/{{$recipe->id}}/edit" color="green">
         Edit Recipe
       </x-layout.crud-button>
@@ -26,11 +27,9 @@
       <x-layout.dl-row title="Description" color="white">
         {{$recipe->description ?? ''}}
       </x-layout.dl-row>
-
       <x-layout.dl-row title="Ingredients">
         @if(count($ingredients) > 0)
         <ul>
-
           @foreach ($ingredients as $ingredient)
           <li>
             <x-buk-checkbox name="ingredient-{{$loop->index+1}}" />{{$ingredient}}</li>
@@ -63,16 +62,12 @@
       </x-layout.dl-row>
       <x-layout.dl-row title="Attachments" color="white">
 
-
         @if($recipe->attachments == null)
         <p class="text-center m-5">This recipe does not have any attachments yet.</p>
         @else
-
-
         @php
         $attachments = json_decode($recipe->attachments, true);
         @endphp
-
         <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
           @foreach($attachments['fileNames'] as $fileName => $originalFileName)
           <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
@@ -100,10 +95,16 @@
           @endforeach
         </ul>
         @endif
+
       </x-layout.dl-row>
     </x-layout.description-list>
-    </div>
-    </div>
-    </div>
   </x-layout.panel>
+  <x-layout.panel width="5">
+    <x-layout.h3>User Comments {{count($recipe->comments)}}</x-layout.h3>
+    <x-layout.comment-form :recipe="$recipe"></x-layout.comment-form>
+    @foreach($comments as $comment)
+    <x-layout.comment :comment="$comment"></x-layout.comment>
+    @endforeach
+  </x-layout.panel>
+
 </x-app-layout>

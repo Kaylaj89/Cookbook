@@ -7,6 +7,10 @@ use App\Models\Author;
 
 class AuthorsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Author::class, 'author');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +61,6 @@ class AuthorsController extends Controller
     public function show($id)
     {
         $author = Author::find($id);
-        $this->authorize('view', [$author]);
         return view('authors.show', ['author'=>$author]);
     }
 
@@ -70,7 +73,6 @@ class AuthorsController extends Controller
     public function edit($id)
     {
         $author = Author::find($id);
-        $this->authorize('update', [$author]);
         return view('authors.edit', ['author'=>$author]);
     }
 
@@ -84,7 +86,6 @@ class AuthorsController extends Controller
     public function update(Request $request, $id)
     {
         $author = Author::find($id);
-        $this->authorize('update', [$author]);
         $author->name = $request->name;
         $author->bio = $request->bio;
         $author->save();
@@ -100,7 +101,6 @@ class AuthorsController extends Controller
     public function destroy($id)
     {
         $author = Author::find($id);
-        $this->authorize('delete', [$author]);
         $author->delete();
         return $this->index();
     }

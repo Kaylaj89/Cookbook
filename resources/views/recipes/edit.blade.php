@@ -43,14 +43,14 @@
         </x-forms.textarea>
         <x-forms.multi-file-upload heading="Attachments" name="attachments[]" filetypes="PNG, JPG, PDF up to 20MB"
           accept=".png,.jpg,.jpeg,.pdf">
+
         </x-forms.multi-file-upload>
 
-        </div>
         <x-forms.button type="submit">Update</x-forms.button>
     </x-forms.form>
   </x-layout.panel>
 
-  @can('delete-recipe', $recipe)
+  @can('delete', $recipe)
   <x-layout.panel width="5">
     <x-layout.h3>Careful! You can NOT undo this.</x-layout.h3>
     <x-buk-form-button :action="route('recipes.destroy', $recipe->id)" method="DELETE"

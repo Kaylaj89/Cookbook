@@ -5,7 +5,6 @@
     </h2>
   </x-slot>
 
-  @can('delete-author', $author)
   <x-layout.panel width="5">
     <x-forms.form action="/authors/{{$author->id}}" method="PATCH">
       <x-forms.input name="name" :value="$author->name"></x-forms.input>
@@ -16,7 +15,7 @@
     </x-forms.form>
   </x-layout.panel>
 
-
+  @can('delete', $author)
   <x-layout.panel width="5">
     <x-layout.h3>Careful! You can NOT undo this.</x-layout.h3>
     <x-buk-form-button :action="route('authors.destroy', $author->id)" method="DELETE"
