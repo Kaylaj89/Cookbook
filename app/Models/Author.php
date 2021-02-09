@@ -12,4 +12,8 @@ class Author extends Model
     public function recipes(){
     	return $this->hasMany(Recipe::class);
     }
+
+    public function team(){
+        return $this->belongsTo(Author::class);
+    }
 }

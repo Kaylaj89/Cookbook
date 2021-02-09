@@ -57,4 +57,6 @@ Trello Board: https://trello.com/b/1bMXQaVg/capstone-cookbook-app
 
 - https://css-tricks.com/css-only-carousel/ 
 
+- https://developer.kroger.com/reference/#operation/authorizationCode
+
 

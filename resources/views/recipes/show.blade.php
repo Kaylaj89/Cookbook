@@ -28,16 +28,21 @@
         {{$recipe->description ?? ''}}
       </x-layout.dl-row>
       <x-layout.dl-row title="Ingredients">
-        @if(count($ingredients) > 0)
-        <ul>
-          @foreach ($ingredients as $ingredient)
-          <li>
-            <x-buk-checkbox name="ingredient-{{$loop->index+1}}" />{{$ingredient}}</li>
-          @endforeach
-        </ul>
-        <button class="text-white bg-indigo-500 hover:bg-indigo-700 px-5 py-2 rounded-lg mt-5">Add Ingredients to
-          Shopping List</button>
-        @endif
+        <x-forms.form action="/shoppinglist" method="PATCH">
+          @if(count($ingredients) > 0)
+          <ul>
+            @foreach ($ingredients as $ingredient)
+            <li>
+            <li>
+              <x-buk-checkbox name="ingredients[]" value="{{$ingredient}}" />{{$ingredient}}</li>
+            @endforeach
+          </ul>
+          <div class="py-1">
+            <x-forms.selectall></x-forms.selectall>
+          </div>
+          <x-forms.button type="submit"> Add to Shopping List </x-forms.button>
+          @endif
+        </x-forms.form>
       </x-layout.dl-row>
       <x-layout.dl-row title="Cooking Directions" color="white">
         @if(count($steps) > 0)

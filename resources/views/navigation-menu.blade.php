@@ -21,6 +21,10 @@
                     <x-jet-nav-link href="{{ route('authors.index') }}" :active="request()->routeIs('authors.index')">
                         {{ __('Authors') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('shoppingList.show') }}"
+                        :active="request()->routeIs('shoppingList.show')">
+                        {{ __('Shopping List') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -167,6 +171,10 @@
             <x-jet-responsive-nav-link href="{{ route('authors.index') }}"
                 :active="request()->routeIs('authors.index')">
                 {{ __('Authors') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('shoppingList.show') }}"
+                :active="request()->routeIs('shoppingList.show')">
+                {{ __('Shopping List') }}
             </x-jet-responsive-nav-link>
         </div>
 

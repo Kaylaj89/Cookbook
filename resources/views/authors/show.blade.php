@@ -13,6 +13,7 @@
       <x-layout.dl-row title="Biography" color="white" class="trix-content">
         {!!$author->bio ?? ''!!}
       </x-layout.dl-row>
+
       <x-layout.dl-row title="Created By" class="trix-content">
         {{$author->user->name ?? ''}}
       </x-layout.dl-row>
@@ -25,4 +26,5 @@
     <x-layout.recipes-table :recipes='$author->recipes' :except="['author']"></x-layout.recipes-table>
   </x-layout.panel>
   @endif
+
 </x-app-layout>

@@ -7,7 +7,7 @@ use App\Models\Author;
 
 class AuthorsController extends Controller
 {
-    public function __construct()
+ public function __construct()
     {
         $this->authorizeResource(Author::class, 'author');
     }
@@ -30,7 +30,6 @@ class AuthorsController extends Controller
      */
     public function create()
     {
-
         return view('authors.create');
     }
 
@@ -58,9 +57,8 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Author $author)
     {
-        $author = Author::find($id);
         return view('authors.show', ['author'=>$author]);
     }
 
@@ -70,9 +68,8 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Author $author)
     {
-        $author = Author::find($id);
         return view('authors.edit', ['author'=>$author]);
     }
 
@@ -83,13 +80,12 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Author $author)
     {
-        $author = Author::find($id);
         $author->name = $request->name;
         $author->bio = $request->bio;
         $author->save();
-        return $this->show($id);
+        return $this->show($author);
     }
 
     /**
@@ -98,9 +94,8 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Author $author)
     {
-        $author = Author::find($id);
         $author->delete();
         return $this->index();
     }

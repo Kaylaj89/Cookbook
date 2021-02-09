@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use App\Models\ShoppingList;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -29,17 +30,26 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
+    
         return DB::transaction(function () use ($input) {
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
             ]), function (User $user) {
+                //as soon as user is created, create a shopping list
+                $this->createShoppingList($user);
                 $this->createTeam($user);
             });
         });
     }
 
+    protected function createShoppingList(User $user){
+        $shoppingList = new ShoppingList();
+        $shoppingList->user_id = $user->id;
+        $shoppingList->ingredients = null;
+        $shoppingList->save();
+    }
     /**
      * Create a personal team for the user.
      *
