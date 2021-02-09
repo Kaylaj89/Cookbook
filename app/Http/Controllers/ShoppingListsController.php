@@ -139,7 +139,7 @@ class ShoppingListsController extends Controller
     protected function krogerAuthorize(){
         $url = "https://api-ce.kroger.com/v1/connect/oauth2/token";
         $headers = array(
-            "Authorization" => "Basic ZmFtaWx5cmVjaXBlYm9vay1hYjM1ZDkyYjE3YzU2NjYwNjQ3MzFiYjM3ODI5ODc4ZDEzODQwNTU0OTE2NDgyNTkwMjk6MXRsNnVqTXhtS2d4ekVWVmZDSTg4dU9TVUY4SUtJSkozNVBUa2JBOA==",
+            "Authorization" => 'Basic ' . config('services.kroger.key'),
         );
         $data = array("grant_type" => "client_credentials", "scope" => "product.compact");
         $response = Http::asForm()->withHeaders($headers)->post($url, $data);
