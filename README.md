@@ -59,4 +59,6 @@ Trello Board: https://trello.com/b/1bMXQaVg/capstone-cookbook-app
 
 - https://developer.kroger.com/reference/#operation/authorizationCode
 
+- Really cool debugger bar for development phase only: https://github.com/barryvdh/laravel-debugbar
+
 

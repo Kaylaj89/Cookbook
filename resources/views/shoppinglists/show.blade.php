@@ -37,7 +37,7 @@
       {{-- </x-layout.panel> --> --}}
       <x-layout.panel width="7">
         <x-layout.h3 class="text-center">Suggested Products: (Powered by The Kroger API)</x-layout.h3>
-        <x-layout.kroger :products="$products"></x-layout.kroger>
+        <livewire:kroger.show-products :ingredients="$ingredients"></livewire:kroger.show-products>
       </x-layout.panel>
       @endif
   </div>

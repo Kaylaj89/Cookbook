@@ -1,3 +1,4 @@
+@if($products != null)
 <x-layout.table :headerCols="['photo', 'name', 'category']">
     @foreach($products as $product)
     <tr>
@@ -10,3 +11,7 @@
     </tr>
     @endforeach
 </x-layout.table>
+
+@else
+<div class="py-3">Loading ...</div>
+@endif

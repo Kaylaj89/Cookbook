@@ -32,7 +32,7 @@ Route::resources([
     ]);
 
 Route::post('/recipes/{recipe}/{fileName}', [RecipesController::class, 'deleteAttachment'])->name('recipes.attachment.delete');
-Route::post('/comments', [CommentsController::class, 'store'])->name('comment.save');
+//Route::post('/comments', [CommentsController::class, 'store'])->name('comment.save');Route::get('/shoppinglist', [ShoppingListsController::class, 'show'])->name('shoppingList.show');
 Route::get('/shoppinglist', [ShoppingListsController::class, 'show'])->name('shoppingList.show');
 Route::patch('/shoppinglist', [ShoppingListsController::class, 'update']);
 Route::post('/shoppinglist', [ShoppingListsController::class, 'delete'])->name('shoppinglist.delete');

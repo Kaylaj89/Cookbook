@@ -105,11 +105,7 @@
     </x-layout.description-list>
   </x-layout.panel>
   <x-layout.panel width="5">
-    <x-layout.h3>User Comments {{count($recipe->comments)}}</x-layout.h3>
-    <x-layout.comment-form :recipe="$recipe"></x-layout.comment-form>
-    @foreach($comments as $comment)
-    <x-layout.comment :comment="$comment"></x-layout.comment>
-    @endforeach
+    <livewire:comments.show :recipe="$recipe"></livewire:comments.show>
   </x-layout.panel>
 
 </x-app-layout>
