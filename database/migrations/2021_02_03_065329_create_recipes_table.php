@@ -14,6 +14,7 @@ class CreateRecipesTable extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
+            $table->boolean('needs_transcription')->default(false);
             $table->text('description')->nullable();
             $table->json('ingredients')->nullable();
             $table->json('steps')->nullable();

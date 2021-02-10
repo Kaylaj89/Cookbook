@@ -64,7 +64,7 @@ class RecipesController extends Controller
         $recipe->steps = $stepsByLine;
         //do attachments here 
         $this->updateAttachments($recipe, $request);
-        //$recipe->privacy = isset($request->privacy)?? ;
+        $recipe->needs_transcription = $request->has('needs_transcription') ? true : false;
         $recipe->save();  
         return $this->show($recipe);
     }
@@ -135,7 +135,7 @@ class RecipesController extends Controller
         $stepsByLine = explode(PHP_EOL, $request->cooking_Directions)[0] == '' ? null : json_encode(explode(PHP_EOL, $request->cooking_Directions));
         $recipe->steps = $stepsByLine;
         $this->updateAttachments($recipe, $request);
-       //$recipe->privacy = isset($request->privacy)?? ;
+        $recipe->needs_transcription = $request->has('needs_transcription') ? true : false;
         $recipe->save();  
         return $this->show($recipe);
     }

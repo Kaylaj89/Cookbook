@@ -26,6 +26,12 @@
             <x-layout.dl-row title="Recipes" class="text-right">
                 {{count($user->currentTeam->recipes)}}
             </x-layout.dl-row>
+
+            <x-layout.dl-row title="Transcription Needed" color="white" class="text-right">
+                @if($total_transcriptions_needed > 0) <x-layout.link href="/recipes/needstranscription">
+                    {{$total_transcriptions_needed}}</x-layout.link> @else
+                {{$total_transcriptions_needed}}@endif
+            </x-layout.dl-row>
         </x-layout.description-list>
     </x-layout.panel>
 

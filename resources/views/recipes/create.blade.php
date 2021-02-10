@@ -11,6 +11,8 @@
 
 
         <x-forms.form action="/recipes" method="POST">
+          <div>
+            <x-buk-checkbox name="needs_transcription" /> Needs Transrcription</div>
 
           <x-forms.input name="name" />
 

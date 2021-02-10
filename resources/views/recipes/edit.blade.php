@@ -16,6 +16,9 @@
     @endif
 
     <x-forms.form action="/recipes/{{$recipe->id}}" method="PATCH">
+      <div>
+        <input type="checkbox" name="needs_transcription" @if($recipe->needs_transcription >0 )checked @endif /> Needs
+        Transrcription</div>
 
       <x-forms.input name="name" value="{{$recipe->name}}">
         </x-form.input>
