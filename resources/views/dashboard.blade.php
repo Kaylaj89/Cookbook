@@ -5,6 +5,10 @@
         </h2>
     </x-slot>
 
+    <x-layout.panel width="2">
+        <livewire:algolia></livewire:algolia>
+    </x-layout.panel>
+
 
     <x-layout.panel width="2">
         @php

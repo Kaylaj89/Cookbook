@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Recipe extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     public function author(){
     	return $this->belongsTo(Author::class);
@@ -27,12 +28,13 @@ class Recipe extends Model
         return Comment::where('recipe_id', '=' , $this->id)->latest()->get();
      }
 
-    // public function availableAuthors(){
-    // 	$authors = Author::all();
-    // 	return $authors;
-    // }
+     public function searchableAs()
+     {
+         return 'recipes_index';
+     }
 
-    // public function user(){
-    // 	return $this->belongsTo(User::class);
-    // }
+     public function toSearchableArray()
+     {
+         return  $this->toArray();
+     }
 }
