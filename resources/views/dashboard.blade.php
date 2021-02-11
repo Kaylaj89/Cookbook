@@ -29,7 +29,7 @@
 
             <x-layout.dl-row title="Transcriptions Needed" color="white" class="text-right">
                 @if($total_transcriptions_needed > 0) <x-layout.transcriptionlink href="/recipes/needstranscription">
-                    {{$total_transcriptions_needed}}</x-layout.transcriptionlink> @else
+                    view {{$total_transcriptions_needed}} recipes</x-layout.transcriptionlink> @else
                 {{$total_transcriptions_needed}}@endif
             </x-layout.dl-row>
         </x-layout.description-list>

@@ -1,5 +1,5 @@
 @php
-$headerCols = ['name', 'author' , 'created by', ''];
+$headerCols = ['name', 'author' , 'created by','','tr'];
 $except = isset($except) ? $except : [];
 $headerCols = array_diff($headerCols, $except);
 @endphp
@@ -27,6 +27,10 @@ $headerCols = array_diff($headerCols, $except);
         <x-layout.table-cell>
             <x-layout.link href="/recipes/{{$recipe->id}}">View</x-layout.link> |
             <x-layout.link href="/recipes/{{$recipe->id}}/edit">Edit</x-layout.link>
+        </x-layout.table-cell>
+
+        <x-layout.table-cell>
+            <livewire:trcheckbox :recipe="$recipe" />
         </x-layout.table-cell>
     </tr>
     @endforeach
