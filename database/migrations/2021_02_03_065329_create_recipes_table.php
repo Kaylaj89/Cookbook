@@ -15,11 +15,11 @@ class CreateRecipesTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->boolean('needs_transcription')->default(false);
-            $table->text('description')->nullable();
+            $table->text('description');
             $table->json('ingredients');
             $table->json('steps');
             $table->json('attachments');
-            $table->foreignId('author_id')->nullable();
+            $table->foreignId('author_id');
             $table->foreignId('user_id');
             $table->foreignId('team_id');  
             $table->timestamps();
