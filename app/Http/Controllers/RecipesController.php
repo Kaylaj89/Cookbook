@@ -158,7 +158,7 @@ class RecipesController extends Controller
         $attachmentsArray = json_decode($recipe->attachments, true);
         if($attachmentsArray != null ){
          foreach($attachmentsArray['fileNames'] as $fileName => $originalName){
-                Storage::disk('public')->delete('uploads/images/'. $fileName);
+                Storage::disk('s3')->delete('uploads/images/'. $fileName);
             }
             $recipe->attachments = null;
         }
@@ -190,8 +190,8 @@ class RecipesController extends Controller
         }
         $recipe->attachments = count($recipeAttachments['fileNames'] )<= 0 ? null : json_encode($recipeAttachments);
         $recipe->save();
-        if (Storage::disk('public')->exists('uploads/images/'. $fileName)) {
-            Storage::disk('public')->delete('uploads/images/'. $fileName);
+        if (Storage::disk('s3')->exists('uploads/images/'. $fileName)) {
+            Storage::disk('s3')->delete('uploads/images/'. $fileName);
         }
         return back()->withInput();
     }
