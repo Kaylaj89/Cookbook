@@ -12,7 +12,7 @@ class Trcheckbox extends Component
 
     // protected $rules = ['recipe' => []];
 
-    public function mount($recipeId){
+    public function mount(Recipe $recipe){
         $this->recipeId = $recipe->id;
         $recipe = Recipe::find($this->recipeId);
         $this->needsTranscription = $recipe->needs_transcription;
