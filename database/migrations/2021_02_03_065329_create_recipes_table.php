@@ -16,14 +16,12 @@ class CreateRecipesTable extends Migration
             $table->string('name', 100);
             $table->boolean('needs_transcription')->default(false);
             $table->text('description')->nullable();
-            $table->json('ingredients')->nullable();
-            $table->json('steps')->nullable();
-            $table->json('attachments')->nullable();
+            $table->json('ingredients')->default('{}');
+            $table->json('steps')->default('{}');
+            $table->json('attachments')->default('{}');
             $table->foreignId('author_id')->nullable();
             $table->foreignId('user_id');
-            $table->foreignId('team_id');
-            // $table->enum('privacy', ['private', 'public'])->default('private'); 
-            // $table->integer('likes')->default('0');   
+            $table->foreignId('team_id');  
             $table->timestamps();
         });
     }
