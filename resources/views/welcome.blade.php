@@ -43,7 +43,7 @@
             width=" 200" height="180"> --}}
 
 
-            {{-- <x-login title="Family Recipes"></x-login> --}}
+            <x-login title="Family Recipes"></x-login>
 
         </div>
 </body>
