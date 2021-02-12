@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Welcome Back!</title>
+    <title>Family Recipes</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@
             width=" 200" height="180"> --}}
 
 
-            <x-login title="Family Recipes"></x-login>
+            {{-- <x-login title="Family Recipes"></x-login> --}}
 
         </div>
 </body>
