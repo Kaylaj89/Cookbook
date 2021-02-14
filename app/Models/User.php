@@ -20,13 +20,15 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'google_id',
     ];
 
     /**
@@ -72,6 +74,8 @@ class User extends Authenticatable
      public function shoppingList(){
         return $this->hasOne(ShoppingList::class);
      }
+
+     
 
 
 }

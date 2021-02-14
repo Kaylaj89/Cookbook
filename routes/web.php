@@ -44,4 +44,7 @@ Route::get('/shoppinglist', [ShoppingListsController::class, 'show'])->name('sho
 Route::patch('/shoppinglist', [ShoppingListsController::class, 'update']);
 Route::post('/shoppinglist', [ShoppingListsController::class, 'delete'])->name('shoppinglist.delete');
 
+Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
 
