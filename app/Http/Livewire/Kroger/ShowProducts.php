@@ -13,7 +13,6 @@ class ShowProducts extends Component
 
 	public function loadKrogerProducts(){
 		// $value = Cache::pull('kroger');
-    //set cache time to 15 seconds for fast loading
 		$this->products = Cache::remember('kroger', 15, function () {
 		    $access_token = $this->krogerAuthorize();
 			$products = [];
@@ -48,7 +47,6 @@ class ShowProducts extends Component
         $category = $data[0]['categories'][0];
         return ['photo'=>$photo, 'description'=>$description, 'category'=>$category];
     }
-
     protected function krogerAuthorize(){
           $url = "https://api-ce.kroger.com/v1/connect/oauth2/token";
           $headers = array(

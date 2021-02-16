@@ -31,23 +31,10 @@
         </x-forms.form>
 
       </x-layout.panel>
-      <!-- <x-layout.panel width="2">
-                    <x-buk-form-button 
-                  :action="route('shoppinglist.delete')"
-                  method="POST"
-                  class="ml-5 bg-red-500 items-center float-right text-white font-bold rounded-lg text-sm px-4 py-2"
-              >
-                  Clear Shopping List
-              </x-buk-form-button>
-</x-layout.panel> -->
-      <x-layout.panel width="7">
-        {{-- <x-layout.h3 class="text-center">Suggested Products: (Powered by The Kroger API)</x-layout.h3> --}}
-        <livewire:kroger.show-products :ingredients="$ingredients"></livewire:kroger.show-products>
-
-      </x-layout.panel>
-
-      {{--<livewire:kroger.show-products :ingredients="$ingredients"></livewire:kroger.show-products>--}}
 
       @endif
+
+      <livewire:kroger.show-products :ingredients="$ingredients" />
+      <livewire:kroger.show-locations />
   </div>
 </x-app-layout>

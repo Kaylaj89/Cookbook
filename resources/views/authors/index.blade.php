@@ -28,11 +28,7 @@
     </x-layout.table>
     @else
     <x-layout.no-data model="authors"></x-layout.no-data>
+
     @endif
   </x-layout.panel>
-
-  </ul>
-  </div>
-  </div>
-  </div>
 </x-app-layout>

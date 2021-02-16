@@ -19,9 +19,11 @@
         "laravel/sanctum": "^2.6",
         "laravel/scout": "^8.6",
         "laravel/socialite": "^5.1",
+        "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
-        "nesbot/carbon": "^2.44"
+        "nesbot/carbon": "^2.44",
+        "stevebauman/location": "^6.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

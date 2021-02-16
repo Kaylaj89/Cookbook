@@ -7,10 +7,9 @@ use App\Models\Recipe;
 
 class Trcheckbox extends Component
 {
+
     public $needsTranscription = false;
     public $recipeId;
-
-    // protected $rules = ['recipe' => []];
 
     public function mount(Recipe $recipe){
         $this->recipeId = $recipe->id;

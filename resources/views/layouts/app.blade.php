@@ -48,5 +48,4 @@
     @livewireScripts
     @bukScripts(true)
 </body>
-
 </html>

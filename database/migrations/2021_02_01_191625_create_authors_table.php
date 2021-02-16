@@ -19,6 +19,7 @@ class CreateAuthorsTable extends Migration
             $table->text('bio')->nullable();
             $table->foreignId('user_id');
             $table->foreignId('team_id');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

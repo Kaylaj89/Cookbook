@@ -47,8 +47,10 @@ class AuthorsController extends Controller
         $author->name = $request->name;
         $author->bio = $request->bio;
         $author->user_id = $user->id;
+        $this->updateAuthorPhoto($author, $request);
         $author->save();
         return $this->index();
+        return redirect('authors')->with('flash.banner', 'A new author was created.');
     }
 
     /**
@@ -84,9 +86,12 @@ class AuthorsController extends Controller
     {
         $author->name = $request->name;
         $author->bio = $request->bio;
-        $author->save();
-        return $this->show($author);
-    }
+        $this->updateAuthorPhoto($author, $request);
+        if ($author->save()){
+            $request->session()->flash('flash.banner', 'Author was updated');
+            $request->session()->flash('flash.bannerStyle', 'success');
+        };
+        return redirect('authors/'.$author->id)->with('flash.banner', 'Author updated successfully.');    }
 
     /**
      * Remove the specified resource from storage.
@@ -96,7 +101,25 @@ class AuthorsController extends Controller
      */
     public function destroy(Author $author)
     {
-        $author->delete();
-        return $this->index();
+
+    //delete author photo
+    Storage::disk('public')->delete($author->photo);
+    $author->delete();
+    return redirect('authors')->with('flash.banner', 'Author deleted successfully.');
     }
+
+    public function updateAuthorPhoto(Author $author, Request $request){         
+        if($request->hasFile('author_photo'))
+        {
+            if($author->photo != null){
+                //delete author photo
+                Storage::disk('public')->delete($author->photo);
+            }
+            $file = $request->file('author_photo'); 
+            $author->photo = str_replace('public', 'storage', $file->store('public/uploads/images/authors'));
+        }
+    }
+
+
+
 }

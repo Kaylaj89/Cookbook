@@ -66,8 +66,7 @@ class RecipesController extends Controller
         $this->updateAttachments($recipe, $request);
         $recipe->needs_transcription = $request->has('needs_transcription') ? true : false;
         $recipe->save();  
-        return $this->show($recipe);
-    }
+        return redirect('recipes')->with('flash.banner', 'A new recipe was created.');    }
 
     /**
      * Display the specified resource.
@@ -137,7 +136,7 @@ class RecipesController extends Controller
         $this->updateAttachments($recipe, $request);
         $recipe->needs_transcription = $request->has('needs_transcription') ? true : false;
         $recipe->save();  
-        return $this->show($recipe);
+        return redirect('recipes/'.$recipe->id)->with('flash.banner', 'Recipe updated successfully.');
     }
 
     /**
@@ -151,7 +150,7 @@ class RecipesController extends Controller
         $this->authorize('delete', [$recipe]);
         $this->deleteOldAttachments($recipe);
         $recipe->delete();
-        return redirect('/recipes');
+        return redirect('recipes')->with('flash.banner', 'Recipe deleted successfully.');
     }
 
     public function deleteOldAttachments(Recipe $recipe){
@@ -193,6 +192,6 @@ class RecipesController extends Controller
         if (Storage::disk('s3')->exists('uploads/images/'. $fileName)) {
             Storage::disk('s3')->delete('uploads/images/'. $fileName);
         }
-        return back()->withInput();
+        return back()->with('flash.banner', 'Recipe attachment deleted successfully.');
     }
 }

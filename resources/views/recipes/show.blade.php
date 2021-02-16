@@ -29,10 +29,10 @@
       </x-layout.dl-row>
       <x-layout.dl-row title="Ingredients">
         <x-forms.form action="/shoppinglist" method="PATCH">
+
           @if(count($ingredients) > 0)
           <ul>
             @foreach ($ingredients as $ingredient)
-            <li>
             <li>
               <x-buk-checkbox name="ingredients[]" value="{{$ingredient}}" />{{$ingredient}}</li>
             @endforeach

@@ -10,6 +10,7 @@ class Recipe extends Model
 {
     use HasFactory, Searchable;
 
+    
     public function author(){
     	return $this->belongsTo(Author::class);
     }

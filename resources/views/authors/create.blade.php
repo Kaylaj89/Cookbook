@@ -12,6 +12,9 @@
         <x-forms.form action="/authors" method="POST">
           <x-forms.input name="name"></x-forms.input>
           <x-forms.trix name="bio" instruction="Please enter a bio for this author."></x-forms.trix>
+
+          <x-forms.upload heading="Author Photo" name="author_photo" filetypes="PNG, JPG, JPEG up to 20MB"
+            accept=".png,.jpg,.jpeg"></x-forms.upload>
           <x-forms.button type="submit">
             Create Author
           </x-forms.button>

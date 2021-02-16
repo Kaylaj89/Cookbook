@@ -30,11 +30,14 @@
             <div class="block mt-4">
                 <label for="remember_me" class="flex items-center">
                     <x-jet-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }} </span>
                 </label>
+
+
+
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-center mt-4">
                 @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
@@ -45,12 +48,16 @@
                     {{ __('Login') }}
                 </x-jet-button>
 
-                <a href="{{ url('auth/google') }}"
-                    style="margin-top: 0px !important;background: green;color: #ffffff;padding: 5px;border-radius:7px;"
-                    class="ml-2 btn-google">
-                    <strong>Login With Google</strong>
-                </a>
             </div>
         </form>
+        <div class="text-center mt-2 mb-4 ">
+            <p class="mb-4">or</p>
+            <a href="/auth/google/redirect" class="px-5 py-2 rounded-lg bg-indigo-700 hover:bg-indigo-500 text-white">
+                {{ __('Login with Google') }}
+            </a>
+        </div>
+        <div class="text-center mt-4 mb-4">
+            <span class="text-sm"> No Account? <x-layout.link href="/register">Sign Up</x-layout.link></span>
+        </div>
     </x-jet-authentication-card>
 </x-guest-layout>

@@ -50,6 +50,7 @@ class CreateNewUser implements CreatesNewUsers
         $shoppingList->ingredients = null;
         $shoppingList->save();
     }
+    
     /**
      * Create a personal team for the user.
      *
